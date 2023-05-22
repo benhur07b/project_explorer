@@ -1,0 +1,47 @@
+{% extends "geonode_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} {% trans "Project Explorer" %} — {{ block.super }} {% endblock %}
+
+{% block extra_mainbody %}
+<script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
+<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+
+<link href='https://viglino.github.io/font-gis/css/font-gis.css' rel='stylesheet' />
+
+<link href='https://watergis.github.io/maplibre-gl-legend/maplibre-gl-legend.css' rel='stylesheet' />
+<script src='https://watergis.github.io/maplibre-gl-legend/maplibre-gl-legend.js'></script>
+
+<link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+
+<link rel='stylesheet' type='text/css' href="{% static 'project_explorer/css/pe_main.css' %}" />   
+
+<!-- <div class="container-fluid" id="pe_map"></div> -->
+<div class='col12 contain fill-light clip'>
+  <div id='pe_map' class='col12 quiet'></div>
+  <div>
+      <a href='#info' id='show-sidebar-btn' class='fg-search-map fg-2x pin-topleft p-2' style="color:#000"></a>
+      <!-- <a href='#info' id='show-sidebar-btn' class='pin-topleft m-1 p-0 btn btn-sm btn-info'><span class='icon big help'></span></a> -->
+  </div>
+  <div id='info' class='col4 fill-lighten2 pin-left offcanvas-left animate'>
+      <a href='#' id='close-sidebar-btn' class='fg-search-map fg-2x pin-topleft p-2' style="color:#000"></a>
+      <div class='pin-topright my-1 p-0'>
+          <button id='pointsBtn' class='p-1 btn btn-sm btn-primary' data-toggle='tooltip' data-placement='top' title='Visualize as points'><span class='fg-multipoint fg-2x'></span></button>
+          <button id='heatmapBtn' class='p-1 btn btn-sm btn-primary' data-toggle='tooltip' data-placement='top' title='Visualize as cluster'><span class='fg-layer-stat fg-2x'></span></button>
+      </div>
+  </div>
+</div>
+
+
+{% endblock extra_mainbody %}
+
+{% block extra_script %}
+  <script src="{% static 'project_explorer/js/pe_main.js' %}"></script>
+  <script>
+    $('#close-sidebar-btn').click(function(){
+        $('#show-sidebar-btn').show();
+    });
+</script>
+{% endblock extra_script %}
+
